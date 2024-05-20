@@ -8,7 +8,7 @@
         <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>br.edu.ifpb.pweb2</groupId>
+    <groupId>br.edu.ifpb.pweb2.armants</groupId>
     <artifactId>armants</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ArmAnts-PWEB2</name>
@@ -35,7 +35,9 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
