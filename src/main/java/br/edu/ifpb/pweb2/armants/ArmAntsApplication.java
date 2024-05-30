@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArmAntsPweb2Application {
+public class ArmAntsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ArmAntsPweb2Application.class, args);
+        SpringApplication.run(ArmAntsApplication.class, args);
     }
 
 }
