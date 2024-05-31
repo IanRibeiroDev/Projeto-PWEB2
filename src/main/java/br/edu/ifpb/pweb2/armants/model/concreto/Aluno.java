@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,10 +22,10 @@ public class Aluno extends PessoaFisica {
             joinColumns = @JoinColumn(name = "id_aluno"),
             inverseJoinColumns = @JoinColumn(name = "id_competencia")
     )
-    private Set<Competencia> competencias = new HashSet<>();
+    private List<Competencia> competencias = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "candidatos")
-    private Set<OfertaEstagio> candidaturas = new HashSet<>();
+    private List<OfertaEstagio> candidaturas = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_estagio")

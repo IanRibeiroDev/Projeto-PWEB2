@@ -10,8 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -28,7 +28,7 @@ public class OfertaEstagio extends Estagio {
             joinColumns = @JoinColumn(name = "id_oferta"),
             inverseJoinColumns = @JoinColumn(name = "id_competencia")
     )
-    private Set<Competencia> competenciasObrigatorias = new HashSet<>();
+    private List<Competencia> competenciasObrigatorias = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
@@ -36,7 +36,7 @@ public class OfertaEstagio extends Estagio {
             joinColumns = @JoinColumn(name = "id_oferta"),
             inverseJoinColumns = @JoinColumn(name = "id_competencia")
     )
-    private Set<Competencia> competenciasOpcionais = new HashSet<>();
+    private List<Competencia> competenciasOpcionais = new ArrayList<>();
 
     @NotNull(message = "Campo obrigatório!")
     @AssertFalse(message = "Oferta de estágio não pode estar aprovada ao ser cadastrada!")
@@ -49,5 +49,5 @@ public class OfertaEstagio extends Estagio {
             joinColumns = @JoinColumn(name = "id_oferta"),
             inverseJoinColumns = @JoinColumn(name = "id_aluno")
     )
-    private Set<Aluno> candidatos = new HashSet<>();
+    private List<Aluno> candidatos = new ArrayList<>();
 }

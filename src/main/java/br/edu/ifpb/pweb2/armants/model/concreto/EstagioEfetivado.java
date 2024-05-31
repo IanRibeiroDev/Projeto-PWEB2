@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -36,5 +36,5 @@ public class EstagioEfetivado extends Estagio {
     @NotNull(message = "Um estágio efetivo deve conter alunos estagiários!")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "estagio")
     @Column(nullable = false)
-    private Set<Aluno> estagiarios = new HashSet<>();
+    private List<Aluno> estagiarios = new ArrayList<>();
 }

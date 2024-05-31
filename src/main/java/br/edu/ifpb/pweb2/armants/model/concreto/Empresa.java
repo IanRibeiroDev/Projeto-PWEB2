@@ -11,8 +11,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -59,10 +59,10 @@ public class Empresa extends Usuario {
     private Boolean bloqueada = false;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empresa")
-    private Set<OfertaEstagio> ofertasCadastradas = new HashSet<>();
+    private List<OfertaEstagio> ofertasCadastradas = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empresa")
-    private Set<EstagioEfetivado> estagioEfetivados = new HashSet<>();
+    private List<EstagioEfetivado> estagiosEfetivados = new ArrayList<>();
 
     //@Pdf
     private String comprovanteEndereco;
