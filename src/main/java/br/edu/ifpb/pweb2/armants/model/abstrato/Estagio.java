@@ -29,7 +29,9 @@ public abstract class Estagio extends EntidadeSerializada {
 
     private Double valeTransporte;
 
+    @NotNull(message = "Um estágio deve estar atrelado a uma empresa!")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_empresa")
+    @Column(nullable = false)
     private Empresa empresa;
 }

@@ -5,9 +5,6 @@ import br.edu.ifpb.pweb2.armants.model.concreto.Competencia;
 import br.edu.ifpb.pweb2.armants.model.concreto.EstagioEfetivado;
 import br.edu.ifpb.pweb2.armants.model.concreto.OfertaEstagio;
 import br.edu.ifpb.pweb2.armants.repository.AlunoRepository;
-import br.edu.ifpb.pweb2.armants.repository.CompetenciaRepository;
-import br.edu.ifpb.pweb2.armants.repository.EstagioEfetivadoRepository;
-import br.edu.ifpb.pweb2.armants.repository.OfertaEstagioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,18 +13,17 @@ import java.util.Optional;
 
 @Component
 public class AlunoService implements Service<Aluno, Integer> {
-
     @Autowired
     private AlunoRepository alunoRepository;
 
     @Autowired
-    private CompetenciaRepository competenciaRepository;
+    private CompetenciaService competenciaService;
 
     @Autowired
-    private OfertaEstagioRepository ofertaEstagioRepository;
+    private OfertaEstagioService ofertaEstagioService;
 
     @Autowired
-    private EstagioEfetivadoRepository estagioEfetivadoRepository;
+    private EstagioEfetivadoService estagioEfetivadoService;
 
     @Override
     public List<Aluno> findAll() {
@@ -48,17 +44,17 @@ public class AlunoService implements Service<Aluno, Integer> {
     public Aluno save(Aluno aluno) {
         List<Competencia> competencias = aluno.getCompetencias();
         if(!competencias.isEmpty()) {
-            competencias.replaceAll(competencia -> competenciaRepository.findById(competencia.getId()).get());
+            competencias.replaceAll(competencia -> competenciaService.findById(competencia.getId()));
         }
 
         List<OfertaEstagio> candidaturas = aluno.getCandidaturas();
         if(!candidaturas.isEmpty()) {
-            candidaturas.replaceAll(ofertaEstagio -> ofertaEstagioRepository.findById(ofertaEstagio.getId()).get());
+            candidaturas.replaceAll(ofertaEstagio -> ofertaEstagioService.findById(ofertaEstagio.getId()));
         }
 
         EstagioEfetivado estagio = aluno.getEstagio();
         if(estagio != null) {
-            aluno.setEstagio(estagioEfetivadoRepository.findById(estagio.getId()).get());
+            aluno.setEstagio(estagioEfetivadoService.findById(estagio.getId()));
         }
 
         return alunoRepository.save(aluno);
