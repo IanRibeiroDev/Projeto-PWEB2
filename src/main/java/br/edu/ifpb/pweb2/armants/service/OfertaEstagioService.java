@@ -1,11 +1,9 @@
 package br.edu.ifpb.pweb2.armants.service;
 
-import br.edu.ifpb.pweb2.armants.model.concreto.Aluno;
-import br.edu.ifpb.pweb2.armants.model.concreto.Competencia;
-import br.edu.ifpb.pweb2.armants.model.concreto.Empresa;
-import br.edu.ifpb.pweb2.armants.model.concreto.OfertaEstagio;
+import br.edu.ifpb.pweb2.armants.model.concreto.*;
 import br.edu.ifpb.pweb2.armants.repository.OfertaEstagioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,7 +21,8 @@ public class OfertaEstagioService implements Service<OfertaEstagio, Integer> {
     private CompetenciaService competenciaService;
 
     @Autowired
-    private AlunoService alunoService;
+    @Lazy
+    private CandidaturaService candidaturaService;
 
     @Override
     public List<OfertaEstagio> findAll() {
@@ -55,9 +54,9 @@ public class OfertaEstagioService implements Service<OfertaEstagio, Integer> {
             competenciasOpcionais.replaceAll(competencia -> competenciaService.findById(competencia.getId()));
         }
 
-        List<Aluno> candidatos = ofertaEstagio.getCandidatos();
+        List<Candidatura> candidatos = ofertaEstagio.getCandidatos();
         if(!candidatos.isEmpty()) {
-            candidatos.replaceAll(candidato -> alunoService.findById(candidato.getId()));
+            candidatos.replaceAll(candidato -> candidaturaService.findById(candidato.getId()));
         }
 
         return ofertaEstagioRepository.save(ofertaEstagio);

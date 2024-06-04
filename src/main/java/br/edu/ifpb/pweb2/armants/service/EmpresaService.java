@@ -5,6 +5,7 @@ import br.edu.ifpb.pweb2.armants.model.concreto.EstagioEfetivado;
 import br.edu.ifpb.pweb2.armants.model.concreto.OfertaEstagio;
 import br.edu.ifpb.pweb2.armants.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,9 +17,11 @@ public class EmpresaService implements Service<Empresa, Integer> {
     private EmpresaRepository empresaRepository;
 
     @Autowired
+    @Lazy
     private OfertaEstagioService ofertaEstagioService;
 
     @Autowired
+    @Lazy
     private EstagioEfetivadoService estagioEfetivadoService;
 
     @Override

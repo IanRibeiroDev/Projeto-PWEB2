@@ -24,8 +24,8 @@ public class Aluno extends PessoaFisica {
     )
     private List<Competencia> competencias = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "candidatos")
-    private List<OfertaEstagio> candidaturas = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "candidato")
+    private List<Candidatura> candidaturas = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_estagio")

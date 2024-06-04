@@ -43,11 +43,6 @@ public class OfertaEstagio extends Estagio {
     @Column(nullable = false)
     private Boolean aprovada = false;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "oferta_aluno",
-            joinColumns = @JoinColumn(name = "id_oferta"),
-            inverseJoinColumns = @JoinColumn(name = "id_aluno")
-    )
-    private List<Aluno> candidatos = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ofertaEstagio")
+    private List<Candidatura> candidatos = new ArrayList<>();
 }
