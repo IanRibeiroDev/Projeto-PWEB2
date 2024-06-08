@@ -28,7 +28,7 @@ public abstract class Usuario extends EntidadeSerializada {
     private String email;
 
     @NotBlank(message = "Campo obrigatório!")
-    @Size(min = 8, max = 12)
+    @Size(min = 8, max = 12, message = "Senha deve conter entre 8 e 12 caracteres!")
     //@HasUpperCase(message = "Senha deve conter pelo menos uma letra maiúscula!")
     //@HasSpecialCharacter(message = "Senha deve conter pelo menos um caracter especial!")
     @Column(length = 12, nullable = false)

@@ -1,0 +1,41 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Coordenadores'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/coordenadores}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(coordenadores)}">
+        <div th:text="'Total ' + ${#lists.size(coordenadores)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th style="text-align: center;">Data de nascimento</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="coordenador : ${coordenadores}">
+                <td><a th:href="@{/coordenadores/{id}(id=${coordenador.id})}" th:text="${coordenador.nome}"></a></td>
+                <td><a th:text="${coordenador.email}"></a></td>
+
+                <td th:text="${#temporals.format(coordenador.dataNascimento, 'dd/MM/yyyy')}" style="text-align: center;">
+                <td>
+                    <form th:action="@{/coordenadores/{id}/delete(id=${coordenador.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

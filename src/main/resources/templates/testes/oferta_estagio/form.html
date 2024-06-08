@@ -1,0 +1,78 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Cadastro de Ofertas de Estágio'">
+
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/ofertas}" method="POST" th:object="${oferta}">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="atividadePrincipal">Atividade Principal</label>
+            <input type="text" th:field="*{atividadePrincipal}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('atividadePrincipal')}" th:errorclass="error" th:errors="*{atividadePrincipal}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="ch">CH</label>
+            <input type="number" th:field="*{ch}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('ch')}" th:errorclass="error" th:errors="*{ch}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="salario">Salario</label>
+            <input type="number" th:field="*{salario}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('salario')}" th:errorclass="error" th:errors="*{salario}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="valeTransporte">Vale Transporte</label>
+            <input type="number" th:field="*{valeTransporte}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('valeTransporte')}" th:errorclass="error" th:errors="*{valeTransporte}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="empresa.id">Empresa</label>
+            <select th:field="*{empresa.id}" class="form-select mb-2">
+                <option th:each="cor : ${empresas}" th:value="${cor.id}" th:text="${cor.nome}" />
+            </select>
+            <p th:if="${#fields.hasErrors('empresa.id')}" th:errorclass="error" th:errors="*{empresa.id}" class="alert alert-danger"/>
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="preRequisitos">Pré-Requisitos</label>
+            <input type="text" th:field="*{preRequisitos}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('preRequisitos')}" th:errorclass="error" th:errors="*{preRequisitos}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label>Competências Obrigatórias</label>
+            <div th:each="competencia : ${competencias}">
+                <div class="form-check">
+                    <input type="checkbox" th:field="*{competenciasObrigatorias}" th:value="${competencia.id}" class="form-check-input"/>
+                    <label th:for="${competencia.id}" th:text="${competencia.nome}" class="form-check-label"></label>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('competenciasObrigatorias')}" th:errorclass="error" th:errors="*{competenciasObrigatorias}" class="alert alert-danger"></p>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label>Competências Opcionais</label>
+            <div th:each="competencia : ${competencias}">
+                <div class="form-check">
+                    <input type="checkbox" th:field="*{competenciasOpcionais}" th:value="${competencia.id}" class="form-check-input"/>
+                    <label th:for="${competencia.id}" th:text="${competencia.nome}" class="form-check-label"></label>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('competenciasOpcionais')}" th:errorclass="error" th:errors="*{competenciasOpcionais}" class="alert alert-danger"></p>
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a class="btn btn-secondary" th:href="@{/ofertas/list}">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

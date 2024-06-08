@@ -1,0 +1,41 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Empresas'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/empresas}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(empresas)}">
+        <div th:text="'Total ' + ${#lists.size(empresas)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>CNPJ</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="empresa : ${empresas}">
+                <td><a th:href="@{/empresas/{id}(id=${empresa.id})}" th:text="${empresa.nome}"></a></td>
+                <td><a th:text="${empresa.email}"></a></td>
+                <td><a th:text="${empresa.cnpj}"></a></td>
+
+                <td>
+                    <form th:action="@{/empresas/{id}/delete(id=${empresa.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

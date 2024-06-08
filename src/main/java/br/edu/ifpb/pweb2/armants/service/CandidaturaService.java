@@ -38,11 +38,13 @@ public class CandidaturaService implements Service<Candidatura, Integer> {
 
     @Override
     public Candidatura save(Candidatura candidatura) {
+        if(candidatura.getOfertaEstagio() != null || candidatura.getId() == null) {
+            OfertaEstagio ofertaEstagio = ofertaEstagioService.findById(candidatura.getOfertaEstagio().getId());
+            candidatura.setOfertaEstagio(ofertaEstagio);
+        }
+
         Aluno candidato = alunoService.findById(candidatura.getCandidato().getId());
         candidatura.setCandidato(candidato);
-
-        OfertaEstagio ofertaEstagio = ofertaEstagioService.findById(candidatura.getOfertaEstagio().getId());
-        candidatura.setOfertaEstagio(ofertaEstagio);
 
         return candidaturaRepository.save(candidatura);
     }
@@ -53,6 +55,14 @@ public class CandidaturaService implements Service<Candidatura, Integer> {
 
     public Candidatura findByIdWithOfertaEstagio(Integer id) {
         return candidaturaRepository.findByIdWithOfertaEstagio(id);
+    }
+
+    public Candidatura findByCandidatoAndOfertaEstagio(Integer idCandidato, Integer idOferta) {
+        return candidaturaRepository.findByCandidatoAndOfertaEstagio(idCandidato, idOferta);
+    }
+
+    public List<Candidatura> findByOfertaEstagio_Id(Integer id) {
+        return candidaturaRepository.findByOfertaEstagio_Id(id);
     }
 
     public void deleteById(Integer id) { candidaturaRepository.deleteById(id); }

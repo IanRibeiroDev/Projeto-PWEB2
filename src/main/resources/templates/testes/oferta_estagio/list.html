@@ -1,0 +1,61 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Ofertas de Estágio'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/ofertas}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(ofertas)}">
+        <div th:text="'Total ' + ${#lists.size(ofertas)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Atividade Principal</th>
+                <th>Competências Obrigatórias</th>
+                <th>Competências Opcionais</th>
+                <th>Aprovada</th>
+                <th>Candidatos</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="oferta : ${ofertas}">
+                <td><a th:href="@{/ofertas/{id}(id=${oferta.id})}" th:text="${oferta.atividadePrincipal}"></a></td>
+
+                <td>
+                    <ul>
+                        <li th:each="competencia : ${oferta.competenciasObrigatorias}" th:text="${competencia.nome}"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul>
+                        <li th:each="competencia : ${oferta.competenciasOpcionais}" th:text="${competencia.nome}"></li>
+                    </ul>
+                </td>
+
+                <td><a th:text="${oferta.aprovada}"></a></td>
+
+                <td>
+                    <ul>
+                        <li th:each="aluno : ${oferta.candidatos}" th:text="${aluno}"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <form th:action="@{/ofertas/{id}/delete(id=${oferta.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

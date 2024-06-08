@@ -1,0 +1,37 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Competencias'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/competencias}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(competencias)}">
+        <div th:text="'Total ' + ${#lists.size(competencias)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="competencia : ${competencias}">
+                <td><a th:href="@{/competencias/{id}(id=${competencia.id})}" th:text="${competencia.nome}"></a></td>
+
+                <td>
+                    <form th:action="@{/competencias/{id}/delete(id=${competencia.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

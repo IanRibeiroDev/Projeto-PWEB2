@@ -1,0 +1,71 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Cadastro de Empresas'">
+
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/empresas}" method="POST" th:object="${empresa}">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="email">Email</label>
+            <input type="text" th:field="*{email}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="senha">Senha</label>
+            <input type="text" th:field="*{senha}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('senha')}" th:errorclass="error" th:errors="*{senha}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="telefone">Telefone</label>
+            <input type="text" th:field="*{telefone}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('telefone')}" th:errorclass="error" th:errors="*{telefone}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="nome">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('nome')}" th:errorclass="error" th:errors="*{nome}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" th:field="*{cnpj}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('cnpj')}" th:errorclass="error" th:errors="*{cnpj}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="endereco">Endereco</label>
+            <input type="text" th:field="*{endereco}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('endereco')}" th:errorclass="error" th:errors="*{endereco}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="pessoaContato">Pessoa para Contato</label>
+            <input type="text" th:field="*{pessoaContato}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('pessoaContato')}" th:errorclass="error" th:errors="*{pessoaContato}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="atividadePrincipal">Atividade Principal</label>
+            <input type="text" th:field="*{atividadePrincipal}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('atividadePrincipal')}" th:errorclass="error" th:errors="*{atividadePrincipal}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="url">url</label>
+            <input type="text" th:field="*{url}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('url')}" th:errorclass="error" th:errors="*{url}" class="alert alert-danger"/>
+        </div>
+
+
+        <div class="form-group mx-sm-3 mb-2">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a class="btn btn-secondary" th:href="@{/empresas/list}">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

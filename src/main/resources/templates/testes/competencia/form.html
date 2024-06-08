@@ -1,0 +1,22 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Cadastro de Competências'">
+
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/competencias}" method="POST" th:object="${competencia}">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="form-group mx-sm-3 mb-2">
+            <label for="nome">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control mb-2" />
+            <p th:if="${#fields.hasErrors('nome')}" th:errorclass="error" th:errors="*{nome}" class="alert alert-danger"/>
+        </div>
+
+        <div class="form-group mx-sm-3 mb-2">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a class="btn btn-secondary" th:href="@{/competencias/list}">Cancelar</a>
+        </div>
+    </form>
+</div>
+</body>
+
+</html>

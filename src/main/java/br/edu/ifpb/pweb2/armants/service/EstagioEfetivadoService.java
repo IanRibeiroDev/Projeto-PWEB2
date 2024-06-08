@@ -41,9 +41,16 @@ public class EstagioEfetivadoService implements Service<EstagioEfetivado, Intege
         Empresa empresa = empresaService.findById(estagioEfetivado.getEmpresa().getId());
         estagioEfetivado.setEmpresa(empresa);
 
+        estagioEfetivado = estagioEfetivadoRepository.save(estagioEfetivado);
+
         List<Aluno> estagiarios = estagioEfetivado.getEstagiarios();
         if(!estagiarios.isEmpty()) {
             estagiarios.replaceAll(estagiario -> alunoService.findById(estagiario.getId()));
+
+            for(Aluno aluno : estagiarios) {
+                aluno.setEstagio(estagioEfetivado);
+                alunoService.save(aluno);
+            }
         }
 
         return estagioEfetivadoRepository.save(estagioEfetivado);

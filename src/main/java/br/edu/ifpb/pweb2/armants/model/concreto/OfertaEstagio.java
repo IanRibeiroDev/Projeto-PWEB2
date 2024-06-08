@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +15,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"candidatos"})
 public class OfertaEstagio extends Estagio {
     @Size(max = 255, message = "Máximo de 255 caracteres!")
     private String preRequisitos;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "oferta_comp_obrigatoria",
             joinColumns = @JoinColumn(name = "id_oferta"),
@@ -30,7 +28,7 @@ public class OfertaEstagio extends Estagio {
     )
     private List<Competencia> competenciasObrigatorias = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "oferta_comp_opcional",
             joinColumns = @JoinColumn(name = "id_oferta"),
@@ -43,6 +41,6 @@ public class OfertaEstagio extends Estagio {
     @Column(nullable = false)
     private Boolean aprovada = false;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ofertaEstagio")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ofertaEstagio")
     private List<Candidatura> candidatos = new ArrayList<>();
 }

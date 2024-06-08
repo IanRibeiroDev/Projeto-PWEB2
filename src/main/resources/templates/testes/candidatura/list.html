@@ -1,0 +1,41 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Alunos'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/candidaturas}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(candidaturas)}">
+        <div th:text="'Total ' + ${#lists.size(candidaturas)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Oferta de Estágio</th>
+                <th>Candidato</th>
+                <th>Status</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="candidatura : ${candidaturas}">
+                <td><a th:href="@{/candidaturas/{id}(id=${candidatura.id})}" th:text="${candidatura.ofertaEstagio != null ? candidatura.ofertaEstagio.atividadePrincipal : 'Candidatura Removida'}"></a></td>
+                <td><a th:text="${candidatura.candidato.nome}"></a></td>
+                <td><a th:text="${candidatura.status}"></a></td>
+
+                <td>
+                    <form th:action="@{/candidaturas/{id}/delete(id=${candidatura.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

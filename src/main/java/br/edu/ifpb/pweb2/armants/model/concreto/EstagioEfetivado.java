@@ -34,7 +34,7 @@ public class EstagioEfetivado extends Estagio {
     private LocalDate termino;
 
     @NotNull(message = "Um estágio efetivo deve conter alunos estagiários!")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "estagio")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "estagio")
     @Column(nullable = false)
     private List<Aluno> estagiarios = new ArrayList<>();
 }

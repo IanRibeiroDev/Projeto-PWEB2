@@ -1,0 +1,49 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Alunos'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/alunos}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(alunos)}">
+        <div th:text="'Total ' + ${#lists.size(alunos)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th style="text-align: center;">Data de nascimento</th>
+                <th>Competencias</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td><a th:href="@{/alunos/{id}(id=${aluno.id})}" th:text="${aluno.nome}"></a></td>
+                <td><a th:text="${aluno.email}"></a></td>
+
+                <td th:text="${#temporals.format(aluno.dataNascimento, 'dd/MM/yyyy')}" style="text-align: center;">
+
+                <td>
+                    <ul>
+                        <li th:each="competencia : ${aluno.competencias}" th:text="${competencia}"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <form th:action="@{/alunos/{id}/delete(id=${aluno.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

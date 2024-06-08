@@ -1,0 +1,52 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:insert="~{layout/layout}" th:with="titulo='Lista de Estágios Efetivados'">
+
+<body>
+<div layout:fragment="content">
+
+    <form th:action="@{/estagios}" method="GET">
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+    <br/>
+
+    <div th:if="${not #lists.isEmpty(estagios)}">
+        <div th:text="'Total ' + ${#lists.size(estagios)} + ' registros'" style="text-align: right; color: gray; font-size: 0.85em;"></div>
+
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Atividade Principal</th>
+                <th>CH</th>
+                <th>Salário</th>
+                <th>Início</th>
+                <th>Término</th>
+                <th>Estagiários</th>
+                <th>Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="estagio : ${estagios}">
+                <td><a th:href="@{/estagios/{id}(id=${estagio.id})}" th:text="${estagio.atividadePrincipal}"></a></td>
+                <td><a th:text="${estagio.ch}"></a></td>
+                <td><a th:text="${estagio.salario}"></a></td>
+                <td><a th:text="${estagio.inicio}"></a></td>
+                <td><a th:text="${estagio.termino}"></a></td>
+
+                <td>
+                    <ul>
+                        <li th:each="estagiario : ${estagio.estagiarios}" th:text="${estagiario.nome}"></li>
+                    </ul>
+                </td>
+
+                <td>
+                    <form th:action="@{/estagios/{id}/delete(id=${estagio.id})}">
+                        <button type="submit" class="btn btn-primary btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+
+</html>

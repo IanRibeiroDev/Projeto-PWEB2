@@ -6,10 +6,7 @@ import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(exclude = {"estagiosEfetivados", "ofertasCadastradas"})
 public class Empresa extends Usuario {
     @NotBlank(message = "Campo obrigatório!")
     @Size(max = 128, message = "Máximo de 128 caracteres!")
@@ -58,10 +56,10 @@ public class Empresa extends Usuario {
     @Column(nullable = false)
     private Boolean bloqueada = false;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empresa")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "empresa")
     private List<OfertaEstagio> ofertasCadastradas = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "empresa")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "empresa")
     private List<EstagioEfetivado> estagiosEfetivados = new ArrayList<>();
 
     //@Pdf

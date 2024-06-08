@@ -23,14 +23,16 @@ public abstract class Estagio extends EntidadeSerializada {
     //@IsNumber(message = "Campo deve conter apenas números!")
     @Min(value = 10, message = "Carga horária mínima de 10 horas semanais!")
     @Max(value = 30, message = "Carga horária máxima de 30 horas semanais!")
-    private Integer CH;
+    private Integer ch;
 
+    @NotNull
     private Double salario;
 
+    @NotNull
     private Double valeTransporte;
 
     @NotNull(message = "Um estágio deve estar atrelado a uma empresa!")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 }
